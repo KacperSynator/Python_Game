@@ -1,11 +1,28 @@
 # Python_Game
-<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/maxicons" title="max.icons">max.icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/vector-stall" title="Vector Stall">Vector Stall</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="" title="edt.im">edt.im</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio">photo3idea_studio</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/made-by-made-premium" title="Made by Made Premium">Made by Made Premium</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-<div>Icons made by <a href="https://www.flaticon.com/authors/muhammad-ali" title="Muhammad Ali">Muhammad Ali</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<a href="https://www.flaticon.com/free-icons/icicle" title="icicle icons">Icicle icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/ice" title="ice icons">Ice icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/icicle" title="icicle icons">Icicle icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/wizard" title="wizard icons">Wizard icons created by max.icons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/dildo" title="dildo icons">Dildo icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/flask" title="flask icons">Flask icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/weapon" title="weapon icons">Weapon icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/club" title="club icons">Club icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/monster" title="monster icons">Monster icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/staff" title="staff icons">Staff icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/snowflake" title="snowflake icons">Snowflake icons created by pictogramer - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/wall" title="wall icons">Wall icons created by Made by Made Premium - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/staff" title="staff icons">Staff icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/village" title="village icons">Village icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/exclamation-mark" title="exclamation mark icons">Exclamation mark icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/question" title="question icons">Question icons created by Muhammad Ali - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/marble" title="marble icons">Marble icons created by edt.im - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/fire" title="fire icons">Fire icons created by DinosoftLabs - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/fox" title="fox icons">Fox icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/chihuahua" title="Chihuahua icons">Chihuahua icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/bat" title="bat icons">Bat icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/forest" title="forest icons">Forest icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/monster" title="monster icons">Monster icons created by Vector Stall - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/death" title="death icons">Death icons created by Eucalyp - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/cthulhu" title="cthulhu icons">Cthulhu icons created by Smashicons - Flaticon</a>
+
+
