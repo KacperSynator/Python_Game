@@ -1,11 +1,20 @@
-import moving_object
+from moving_object import MovingObject
 import pygame
 
 
-class Mob(moving_object.MovingObject):
+class Mob(MovingObject):
     def __init__(self, health: float = 100, **kwargs):
         super().__init__(**kwargs)
         self._health = health
+        self._max_health = health
+
+    @property
+    def health(self):
+        return self._health
+
+    @property
+    def max_health(self):
+        return self._max_health
 
     def heal(self, health: float) -> None:
         self._health += health
@@ -15,8 +24,7 @@ class Mob(moving_object.MovingObject):
         if self._health <= 0:
             self.die()
 
-    def attack(self):
-        pass
+
 
 
 

@@ -12,7 +12,7 @@ class Object(object):
     count = 0
     groups = {}
 
-    def __init__(self, screen, image_path: str, position: tuple = (0, 0), angle: float = 0.0):
+    def __init__(self, screen, image_path: str, position: tuple = (0, 0), angle: float = 0.0, **kwargs):
         self._screen = screen
         self._position = pygame.math.Vector2(position)
         self._angle = angle
@@ -32,14 +32,20 @@ class Object(object):
             Object.groups[GroupNames.object] = Group(GroupNames.object)
         Object.groups[GroupNames.object].add(self)
 
+    def __delete__(self):
+        Object.count -= 1
+
     def die(self):
         Object.groups[GroupNames.object].remove(self)
-        Object.count -= 1
         del self
 
     @property
     def position(self):
         return tuple(self._position)
+
+    @position.setter
+    def position(self, pos: tuple):
+        self._position = pygame.Vector2(pos)
 
     @property
     def angle(self):
@@ -103,6 +109,11 @@ class Object(object):
         # pygame.draw.circle(self._screen, (0, 255, 0), self._position, 4, 0)
         # pygame.draw.line(self._screen, (0, 255, 0), (self._position[0] - 20, self._position[1]), (self._position[0] + 20, self._position[1]), 2)
         # pygame.draw.line(self._screen, (0, 255, 0), (self._position[0], self._position[1] - 20), (self._position[0], self._position[1] + 20), 2)
+
+    @staticmethod
+    def draw_all() -> None:
+        for obj in Object.groups[GroupNames.object].list:
+            obj.draw()
 
     def rotate_image(self):
         image_center = self._image_size / 2

@@ -1,22 +1,22 @@
-import moving_object
 import pygame
-import imp
+from moving_object import MovingObject
 from object import GroupNames
 
 
-class Projectile(moving_object.MovingObject):
-    def __init__(self, move_vec: tuple, **kwargs):
-        super().__init__(image_path="assets/projectiles/snowflake_white.png", **kwargs)
+class Projectile(MovingObject):
+    def __init__(self, move_vec: tuple, damage: float = 1, rotate_speed: float = 0, max_range: int = 500, **kwargs):
+        super().__init__(**kwargs)
         self._move_vec = (pygame.math.Vector2(move_vec) - self._position).normalize()
-        self._move_speed = 5
         self._start_pos = self._position[:]
-        self._max_range = 500
+        self._max_range = max_range
+        self._damage = damage
+        self._rotate_speed = rotate_speed
 
     def move(self):
-        self.rotate_translate(3, self._move_vec)
+        self.rotate_translate(self._rotate_speed, self._move_vec)
         obj = self.check_group_collisions(Projectile.groups[GroupNames.enemy])
         if obj is not None:
-            obj.receive_damage(10)
+            obj.receive_damage(self._damage)
             self.die()
             return
 

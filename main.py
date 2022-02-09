@@ -1,10 +1,10 @@
-import game
+from game import Game
 
 # python -m pygame.examples.aliens # example game run in terminal
 
 
 def main():
-    g = game.Game()
+    g = Game()
     g.start()
 
 
