@@ -4,7 +4,7 @@ import pygame
 
 class Mob(MovingObject):
     def __init__(self, health: float = 100, **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(solve_collision=True, **kwargs)
         self._health = health
         self._max_health = health
 

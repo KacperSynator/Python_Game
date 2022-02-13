@@ -1,8 +1,10 @@
 import pygame
 from player import Player
 from moving_object import MovingObject
-from object import  Object
+from object import Object
 from imp import Imp
+from range_weapon import RangeWeapon
+from enemy import Enemy
 
 
 class Game:
@@ -18,8 +20,10 @@ class Game:
         pygame.display.set_icon(icon)
         # Player
         self._player = Player(screen=self._screen, position=(300, 300))
-        # Enemy
+        RangeWeapon(screen=self._screen, **RangeWeapon.weapon_list["crystal_wand"], position=(600, 200))
+        # Enemies
         Imp(screen=self._screen, position=(500, 600))
+        Imp(screen=self._screen, position=(500, 400))
         # Clock
         self._clock = pygame.time.Clock()
 
@@ -35,7 +39,9 @@ class Game:
                     running = False
                 # mouse input
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    self._player.auto_attack(pygame.mouse.get_pos())
+                    pressed_buttons = pygame.mouse.get_pressed()
+                    if pressed_buttons[0]:
+                        self._player.auto_attack(pygame.mouse.get_pos())
                 # keyboard input
                 if event.type == pygame.KEYDOWN:
                     if event.key in [pygame.K_a, pygame.K_LEFT]:
@@ -46,10 +52,10 @@ class Game:
                         self._player.move_vec = (self._player.move_vec[0], -1)
                     if event.key in [pygame.K_s, pygame.K_DOWN]:
                         self._player.move_vec = (self._player.move_vec[0], 1)
-                    if event.key in [pygame.K_q]:
-                        self._player.switch_weapon("wand")
                     if event.key in [pygame.K_e]:
-                        self._player.switch_weapon("crystal_wand")
+                        self._player.pick_item()
+                    if event.key in [pygame.K_r]:
+                        self._player.skill(pygame.mouse.get_pos())
                 if event.type == pygame.KEYUP:
                     if event.key in [pygame.K_a, pygame.K_LEFT, pygame.K_d, pygame.K_RIGHT]:
                         self._player.move_vec = (0, self._player.move_vec[1])

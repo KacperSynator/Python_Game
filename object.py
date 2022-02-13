@@ -6,6 +6,7 @@ class GroupNames:
     moving_object = "moving_object"
     enemy = "enemy"
     player = "player"
+    item = "item"
 
 
 class Object(object):
@@ -55,6 +56,10 @@ class Object(object):
     def image(self):
         return self._image
 
+    @property
+    def image_size(self):
+        return self._image_size
+
     @image.setter
     def image(self, image):
         self._image = image
@@ -71,35 +76,39 @@ class Object(object):
             # find perpendicular line to edges
             for i in range(2):
                 normal = pygame.math.Vector2(corners_pos[i+1].y - corners_pos[i].y, corners_pos[i].x - corners_pos[i+1].x)
-                max_self = min_self = None
-                for corner in self_corners_pos:
-                    projected = normal.x * corner.x + normal.y * corner.y
-                    if min_self is None or projected < min_self:
-                        min_self = projected
-                    if max_self is None or projected > max_self:
-                        max_self = projected
-                max_other = min_other = None
-                for corner in other_corners_pos:
-                    projected = normal.x * corner.x + normal.y * corner.y
-                    if min_other is None or projected < min_other:
-                        min_other = projected
-                    if max_other is None or projected > max_other:
-                        max_other = projected
-                if max_self < min_other or max_other < min_self:
+                # max_self = min_self = None
+                # for corner in self_corners_pos:
+                #     projected = normal.x * corner.x + normal.y * corner.y
+                #     if min_self is None or projected < min_self:
+                #         min_self = projected
+                #     if max_self is None or projected > max_self:
+                #         max_self = projected
+                # max_other = min_other = None
+                # for corner in other_corners_pos:
+                #     projected = normal.x * corner.x + normal.y * corner.y
+                #     if min_other is None or projected < min_other:
+                #         min_other = projected
+                #     if max_other is None or projected > max_other:
+                #         max_other = projected
+                # if max_self < min_other or max_other < min_self:
+                #     return False
+                max_min = [[None, None], [None, None]]  # [[max, min].self, [max, min].other]
+                for index, corners in enumerate([self_corners_pos, other_corners_pos]):
+                    for corner in corners:
+                        projected = normal.x * corner.x + normal.y * corner.y
+                        if max_min[index][1] is None or projected < max_min[index][1]:
+                            max_min[index][1] = projected
+                        if max_min[index][0] is None or projected > max_min[index][0]:
+                            max_min[index][0] = projected
+                if max_min[0][0] < max_min[1][1] or max_min[1][0] < max_min[0][1]:
                     return False
         return True
 
-    def check_all_collisions(self):
-        for obj in Object.groups[GroupNames.object]:
-            if self.check_collision(obj):
-                return obj
-        return None
+    def check_all_collisions(self) -> list:
+        return [obj for obj in Object.groups[GroupNames.object] if self.check_collision(obj)]
 
-    def check_group_collisions(self, group):
-        for obj in group.list:
-            if self.check_collision(obj):
-                return obj
-            return None
+    def check_group_collisions(self, group) -> list:
+        return [obj for obj in group.list if self.check_collision(obj)]
 
     def draw(self) -> None:
         if self._angle != 0.0:
@@ -109,6 +118,10 @@ class Object(object):
         # pygame.draw.circle(self._screen, (0, 255, 0), self._position, 4, 0)
         # pygame.draw.line(self._screen, (0, 255, 0), (self._position[0] - 20, self._position[1]), (self._position[0] + 20, self._position[1]), 2)
         # pygame.draw.line(self._screen, (0, 255, 0), (self._position[0], self._position[1] - 20), (self._position[0], self._position[1] + 20), 2)
+
+    @staticmethod
+    def circle_scan_group(group, radius: float, position: tuple) -> list:
+        return [obj for obj in group.list if (pygame.Vector2(obj.position) - pygame.Vector2(position)).length() <= radius + obj.image_size[0]]
 
     @staticmethod
     def draw_all() -> None:

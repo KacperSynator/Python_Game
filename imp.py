@@ -10,9 +10,9 @@ class Imp(Enemy):
 
     def move(self):
         player = Imp.groups[GroupNames.player].list[0]
-        if self.check_group_collisions(Imp.groups[GroupNames.player]) is None:
+        if not self._collisions or player not in self._collisions:
             self._move_vec = (pygame.math.Vector2(player.position) - self._position).normalize()
-            self.translate(self._move_vec)
+            self.translate(tuple(self._move_vec))
         else:
             self.attack(player)
             self.translate((0, 0))

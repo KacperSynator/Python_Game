@@ -22,7 +22,7 @@ class RangeWeapon(Weapon):
 
     def attack(self, mouse_position):
         if self._last_attack_time + self.attack_delay_ms <= pygame.time.get_ticks():
-            Projectile(screen=self._screen, move_vec=mouse_position, damage=RangeWeapon.weapon_list[self._name]["attack_damage"],
+            Projectile.spawn(screen=self._screen, move_vec=mouse_position, damage=RangeWeapon.weapon_list[self._name]["attack_damage"],
                        position=self._projectile_start_offset+self._position, **RangeWeapon.weapon_list[self._name]["projectile"])
 
             self._last_attack_time = pygame.time.get_ticks()
