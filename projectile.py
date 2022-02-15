@@ -56,8 +56,8 @@ class Meteorite(Projectile):
     def draw(self) -> None:
         super().draw()
         line_length = 5
-        pygame.draw.circle(self._screen, (0, 255, 0), self._end_position, self._radius, 0)
+        # pygame.draw.circle(self._screen, (0, 255, 0), self._end_position, self._radius, 0)
         pygame.draw.line(self._screen, (0, 0, 0), (self._end_position[0] - line_length, self._end_position[1] - line_length),
-                         (self._end_position[0] + line_length, self._end_position[1] + line_length), 2)
+                          (self._end_position[0] + line_length, self._end_position[1] + line_length), 2)
         pygame.draw.line(self._screen, (0, 0, 0), (self._end_position[0] - line_length, self._end_position[1] + line_length),
-                         (self._end_position[0] + line_length, self._end_position[1] - line_length), 2)
+                          (self._end_position[0] + line_length, self._end_position[1] - line_length), 2)

@@ -3,7 +3,7 @@ from player import Player
 from moving_object import MovingObject
 from object import Object
 from imp import Imp
-from range_weapon import RangeWeapon
+from weapon import RangeWeapon
 from enemy import Enemy
 
 
@@ -52,10 +52,12 @@ class Game:
                         self._player.move_vec = (self._player.move_vec[0], -1)
                     if event.key in [pygame.K_s, pygame.K_DOWN]:
                         self._player.move_vec = (self._player.move_vec[0], 1)
-                    if event.key in [pygame.K_e]:
+                    if event.key == pygame.K_e:
                         self._player.pick_item()
-                    if event.key in [pygame.K_r]:
+                    if event.key == pygame.K_r:
                         self._player.skill(pygame.mouse.get_pos())
+                    if event.key == pygame.K_SPACE:
+                        self._player.move_skill(pygame.mouse.get_pos())
                 if event.type == pygame.KEYUP:
                     if event.key in [pygame.K_a, pygame.K_LEFT, pygame.K_d, pygame.K_RIGHT]:
                         self._player.move_vec = (0, self._player.move_vec[1])

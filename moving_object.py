@@ -26,8 +26,8 @@ class MovingObject(Object, ABC):
         return self._move_vec
 
     @move_vec.setter
-    def move_vec(self, vec: tuple):
-        if vec != (0.0, 0.0):
+    def move_vec(self, vec: tuple, normalize: bool = True):
+        if vec != (0.0, 0.0) and normalize:
             self._move_vec = pygame.math.Vector2(vec).normalize()
         else:
             self._move_vec = pygame.math.Vector2(vec)
@@ -40,8 +40,8 @@ class MovingObject(Object, ABC):
     def solve(self, state: bool):
         self._solve = state
 
-    def translate(self, vector: tuple):
-        if vector == (0, 0):
+    def translate(self, vector: tuple, normalize: bool = True):
+        if vector == (0, 0) or not normalize:
             self._position += pygame.math.Vector2(vector) * self._move_speed
         else:
             self._position += pygame.math.Vector2(vector).normalize() * self._move_speed
