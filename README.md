@@ -27,6 +27,8 @@
 <li> <a href="https://www.flaticon.com/free-icons/death" title="death icons">Death icons created by Eucalyp - Flaticon</a> </li>
 <li> <a href="https://www.flaticon.com/free-icons/cthulhu" title="cthulhu icons">Cthulhu icons created by Smashicons - Flaticon</a> </li>
 <li> <a href="https://www.flaticon.com/free-icons/impact" title="impact icons">Impact icons created by wanicon - Flaticon</a> </li>
+<li> <a href="https://www.flaticon.com/free-icons/teleportation" title="teleportation icons">Teleportation icons created by Freepik - Flaticon</a></li>
+<li> <a href="https://www.flaticon.com/free-icons/teleport" title="teleport icons">Teleport icons created by Freepik - Flaticon</a></li>
 </ul>
 
 

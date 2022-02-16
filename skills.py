@@ -13,10 +13,15 @@ class Skill(ABC):
                 return fn(self, *args, **kwargs)
         return wrapper
 
-    def __init__(self, name: str, cooldown_s: float, **kwargs):
+    def __init__(self, name: str, cooldown_s: float, icon_path: str, **kwargs):
         self._name = name
         self._cooldown = cooldown_s * 1000  # convert to ms
         self._last_use_time = -self._cooldown
+        self._icon = pygame.image.load(icon_path)
+
+    @property
+    def icon(self):
+        return self._icon
 
     @property
     def remaining_cooldown(self) -> float:
@@ -37,7 +42,7 @@ class Skill(ABC):
 
 class MeteoriteSkill(Skill):
     def __init__(self, screen):
-        Skill.__init__(self, name="Meteorite", cooldown_s=10)
+        Skill.__init__(self, name="Meteorite", cooldown_s=10, icon_path="assets/skill_icons/meteorite_icon.png")
         self._screen = screen
 
     @Skill._check_cooldown
@@ -47,7 +52,7 @@ class MeteoriteSkill(Skill):
 
 class Blink(Skill):
     def __init__(self, moving_object, max_range: int = 100):
-        Skill.__init__(self, name="Blink", cooldown_s=5)
+        Skill.__init__(self, name="Blink", cooldown_s=5, icon_path="assets/skill_icons/blink_icon.png")
         self._max_range = max_range
         self._moving_object = moving_object
 
