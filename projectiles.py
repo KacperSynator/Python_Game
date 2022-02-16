@@ -5,13 +5,15 @@ from abc import ABC, abstractmethod
 
 
 class Projectile(MovingObject):
-    def __init__(self, move_vec: tuple = (0, 0), damage: float = 1, rotate_speed: float = 0, max_range: int = 500, **kwargs):
+    def __init__(self, end_position: tuple = (0, 0), damage: float = 1, rotate_speed: float = 0, max_range: int = 500,
+                 target_player_enemies: tuple = (False, True), **kwargs):
         super().__init__(**kwargs)
-        self._move_vec = (pygame.math.Vector2(move_vec) - self._position).normalize()
+        self._move_vec = (pygame.math.Vector2(end_position) - self._position).normalize()
         self._start_pos = self._position[:]
         self._max_range = max_range
         self._damage = damage
         self._rotate_speed = rotate_speed
+        self._target_pl_en = target_player_enemies
 
     @staticmethod
     def spawn(**kwargs):
@@ -19,7 +21,11 @@ class Projectile(MovingObject):
 
     def move(self):
         self.rotate_translate(self._rotate_speed, tuple(self._move_vec))
-        objs = self.check_group_collisions(Projectile.groups[GroupNames.enemy])
+        objs = []
+        if self._target_pl_en[1] and self.check_group_collisions(Projectile.groups[GroupNames.enemy]):
+            objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.enemy]))
+        if self._target_pl_en[0] and self.check_group_collisions(Projectile.groups[GroupNames.player]):
+            objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.player]))
         if objs:
             for obj in objs:
                 obj.receive_damage(self._damage)
@@ -33,9 +39,9 @@ class Projectile(MovingObject):
 class Meteorite(Projectile):
     def __init__(self, end_position, radius, **kwargs):
         spawn_offset = pygame.Vector2(-200, -200)
-        position = pygame.Vector2(end_position) + spawn_offset
-        super().__init__(image_path="assets/projectiles/meteorite.png", move_speed=5, position=position, **kwargs)
-        self._move_vec = -1 * spawn_offset
+        spawn_position = pygame.Vector2(end_position) + spawn_offset
+        super().__init__(image_path="assets/projectiles/meteorite.png", move_speed=5, position=spawn_position,
+                         end_position=end_position, **kwargs)
         self._end_position = pygame.Vector2(end_position)
         self._radius = radius
 

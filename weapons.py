@@ -1,6 +1,6 @@
 from item import Item
 from abc import ABC, abstractmethod
-from projectile import Projectile
+from projectiles import Projectile
 import functools
 import pygame
 
@@ -55,5 +55,5 @@ class RangeWeapon(Weapon):
 
     @Weapon._check_delay
     def attack(self, mouse_position):
-        Projectile.spawn(screen=self._screen, move_vec=mouse_position, damage=RangeWeapon.weapon_list[self._name]["attack_damage"],
-                       position=self._projectile_start_offset+self._position, **RangeWeapon.weapon_list[self._name]["projectile"])
+        Projectile.spawn(screen=self._screen, end_position=mouse_position, damage=RangeWeapon.weapon_list[self._name]["attack_damage"],
+                         position=self._projectile_start_offset+self._position, **RangeWeapon.weapon_list[self._name]["projectile"])

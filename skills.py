@@ -1,6 +1,6 @@
 import pygame
 from abc import ABC, abstractmethod
-from projectile import Meteorite
+from projectiles import Meteorite
 import functools
 
 

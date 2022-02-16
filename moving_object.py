@@ -26,8 +26,8 @@ class MovingObject(Object, ABC):
         return self._move_vec
 
     @move_vec.setter
-    def move_vec(self, vec: tuple, normalize: bool = True):
-        if vec != (0.0, 0.0) and normalize:
+    def move_vec(self, vec: tuple):
+        if vec != (0.0, 0.0):
             self._move_vec = pygame.math.Vector2(vec).normalize()
         else:
             self._move_vec = pygame.math.Vector2(vec)
@@ -49,7 +49,7 @@ class MovingObject(Object, ABC):
         self._collisions = objs
         if objs:
             for obj in objs:
-                if self.solve:
+                if self.solve and obj.solve:
                     self.solve_collision(obj)
 
     def rotate(self, angle: float):
@@ -68,11 +68,8 @@ class MovingObject(Object, ABC):
         current_distance = to_other_vec.length()
         max_distance = self.image_size[0]/2 + obj.image_size[0]/2
         move_vec = to_other_vec.normalize()*current_distance/max_distance/2
-        if obj.solve:
-            obj.position = obj.position + move_vec
-            self.position = self.position - move_vec
-        else:
-            self.position = self.position - 2*move_vec
+        obj.position = obj.position + move_vec
+        self.position = self.position - move_vec
 
     @abstractmethod
     def move(self):

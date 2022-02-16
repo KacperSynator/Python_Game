@@ -3,7 +3,7 @@ import pygame
 from object import Group, GroupNames
 from HUD import HUD
 from skills import MeteoriteSkill, Blink
-from weapon import Weapon, RangeWeapon
+from weapons import Weapon, RangeWeapon
 
 
 class Player(Mob):
