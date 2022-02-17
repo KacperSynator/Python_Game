@@ -3,7 +3,7 @@ from player import Player
 from moving_object import MovingObject
 from object import Object
 from weapons import RangeWeapon
-from enemies import Imp, Enemy, Cthulhu
+from enemies import Imp, Enemy, Cthulhu, FireElemental
 
 
 class Game:
@@ -24,6 +24,7 @@ class Game:
         Imp(screen=self._screen, position=(500, 600))
         Imp(screen=self._screen, position=(500, 400))
         Cthulhu(screen=self._screen, position=(600, 100))
+        FireElemental(screen=self._screen, position=(600, 200))
         # Clock
         self._clock = pygame.time.Clock()
 

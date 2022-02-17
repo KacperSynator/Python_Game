@@ -6,21 +6,27 @@ from abc import ABC, abstractmethod
 
 class Projectile(MovingObject):
     def __init__(self, end_position: tuple = (0, 0), damage: float = 1, rotate_speed: float = 0, max_range: int = 500,
-                 target_player_enemies: tuple = (False, True), **kwargs):
+                 target_player_enemies: tuple = (False, True), rotating: bool = False, **kwargs):
         super().__init__(**kwargs)
         self._move_vec = (pygame.math.Vector2(end_position) - self._position).normalize()
+        if not rotating:
+            self.rotate(self._move_vec.angle_to(pygame.Vector2(0, 1)))  # front of projectile must be at the bottom of image
         self._start_pos = self._position[:]
         self._max_range = max_range
         self._damage = damage
         self._rotate_speed = rotate_speed
         self._target_pl_en = target_player_enemies
+        self._rotating = rotating
 
     @staticmethod
     def spawn(**kwargs):
         Projectile(**kwargs)
 
     def move(self):
-        self.rotate_translate(self._rotate_speed, tuple(self._move_vec))
+        if self._rotating:
+            self.rotate_translate(self._rotate_speed, tuple(self._move_vec))
+        else:
+            self.translate(tuple(self._move_vec))
         objs = []
         if self._target_pl_en[1] and self.check_group_collisions(Projectile.groups[GroupNames.enemy]):
             objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.enemy]))

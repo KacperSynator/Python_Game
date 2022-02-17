@@ -23,7 +23,7 @@ class Enemy(Mob, ABC):
         self._attack_damage = attack_damage
         self._attack_delay = attack_delay_ms
         self._attack_time = -attack_delay_ms
-        self._bar_center_offset = pygame.Vector2(0, -self._image_size[1] // 2)
+        self._bar_center_offset = pygame.Vector2(0, -self._image_size[1] // 2 - 5)
         self._health_bar = Bar(screen=self._screen, bar_size=(self._image_size[0] * 0.8, 5), front_color=(255, 0, 0),
                                top_left=self._position + self._bar_center_offset, border_width=1, show_text=False)
         if GroupNames.enemy not in Enemy.groups.keys():
@@ -50,7 +50,7 @@ class Enemy(Mob, ABC):
 
 class Imp(Enemy):
     def __init__(self, **kwargs):
-        super().__init__(image_path="assets/mobs/enemies/imp.png", health=20, move_speed=1.4, attack_damage=5,
+        super().__init__(image_path="assets/mobs/enemies/imp.png", health=40, move_speed=1.4, attack_damage=10,
                          attack_delay_ms=1000, **kwargs)
 
     def move(self):
@@ -67,6 +67,12 @@ class Imp(Enemy):
         print("imp: attack")
         target.receive_damage(self._attack_damage)
         self._attack_time = pygame.time.get_ticks()
+
+
+class FireElemental(Imp):
+    def __init__(self, **kwargs):
+        super(Imp, self).__init__(image_path="assets/mobs/enemies/fire_elemental_48px.png", health=20, move_speed=2,
+                                  attack_damage=5, attack_delay_ms=1000, **kwargs)
 
 
 class Cthulhu(Enemy):
@@ -87,6 +93,6 @@ class Cthulhu(Enemy):
     def attack(self, target):
         print("cthulhu: attack")
         Projectile(screen=self._screen, end_position=target.position, damage=self._attack_damage, position=self.position,
-                   target_player_enemies=(True, False), **RangeWeapon.weapon_list["wand"]["projectile"])
+                   target_player_enemies=(True, False), image_path="assets/projectiles/slime.png", max_range=600, move_speed=5)
 
 

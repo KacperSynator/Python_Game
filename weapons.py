@@ -40,12 +40,14 @@ class RangeWeapon(Weapon):
     weapon_list = {"wand": {"name": "wand", "attack_damage": 5, "attack_speed": 2, "projectile_range": 500, "angle": 45,
                              "projectile_start_offset": (0, -20), "image_path": "assets/items/weapons/staff.png",
                              "weapon_offset": (22, 0),
-                            "projectile": {"image_path": "assets/projectiles/snowflake.png", "rotate_speed": 3, "move_speed": 5}},
+                            "projectile": {"image_path": "assets/projectiles/snowflake.png", "rotate_speed": 3,
+                                           "move_speed": 5, "rotating": True}},
 
                    "crystal_wand": {"name": "crystal_wand", "attack_damage": 10, "attack_speed": 1, "projectile_range": 500,
                              "angle": 45, "projectile_start_offset": (0, -20), "image_path": "assets/items/weapons/staff2.png",
                              "weapon_offset": (22, 0),
-                             "projectile": {"image_path": "assets/projectiles/fire.png", "rotate_speed": 3, "move_speed": 5}},
+                             "projectile": {"image_path": "assets/projectiles/fire.png", "rotate_speed": 3,
+                                            "move_speed": 5, "rotating": False}},
                    }
 
     def __init__(self, projectile_range: int = 500, projectile_start_offset: tuple = (0, 0),  **kwargs):
