@@ -23,6 +23,9 @@ class Player(Mob):
     def weapon(self):
         return self._weapon
 
+    def die(self):
+        pass
+
     def auto_attack(self, mouse_position):
         self._weapon.attack(mouse_position)
 

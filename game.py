@@ -3,7 +3,7 @@ from player import Player
 from moving_object import MovingObject
 from object import Object
 from weapons import RangeWeapon
-from enemies import Imp, Enemy, Cthulhu, FireElemental
+from enemies import EnemySpawner
 
 
 class Game:
@@ -21,10 +21,8 @@ class Game:
         self._player = Player(screen=self._screen, position=(300, 300))
         RangeWeapon(screen=self._screen, **RangeWeapon.weapon_list["crystal_wand"], position=(600, 200))
         # Enemies
-        Imp(screen=self._screen, position=(500, 600))
-        Imp(screen=self._screen, position=(500, 400))
-        Cthulhu(screen=self._screen, position=(600, 100))
-        FireElemental(screen=self._screen, position=(600, 200))
+        self._enemy_spawner = EnemySpawner(screen=self._screen)
+        self._enemy_spawner.spawn_enemies(count=5)
         # Clock
         self._clock = pygame.time.Clock()
 

@@ -12,6 +12,7 @@ class Projectile(MovingObject):
         if not rotating:
             self.rotate(self._move_vec.angle_to(pygame.Vector2(0, 1)))  # front of projectile must be at the bottom of image
         self._start_pos = self._position[:]
+        self._end_position = pygame.Vector2(end_position)
         self._max_range = max_range
         self._damage = damage
         self._rotate_speed = rotate_speed
@@ -22,11 +23,7 @@ class Projectile(MovingObject):
     def spawn(**kwargs):
         Projectile(**kwargs)
 
-    def move(self):
-        if self._rotating:
-            self.rotate_translate(self._rotate_speed, tuple(self._move_vec))
-        else:
-            self.translate(tuple(self._move_vec))
+    def handle_collisions(self) -> bool:
         objs = []
         if self._target_pl_en[1] and self.check_group_collisions(Projectile.groups[GroupNames.enemy]):
             objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.enemy]))
@@ -36,9 +33,33 @@ class Projectile(MovingObject):
             for obj in objs:
                 obj.receive_damage(self._damage)
             self.die()
+            return True
+        return False
+
+    def move(self):
+        if self._rotating:
+            self.rotate_translate(self._rotate_speed, tuple(self._move_vec))
+        else:
+            self.translate(tuple(self._move_vec))
+        if self.handle_collisions():
             return
 
         if (self._position - self._start_pos).length() > self._max_range:
+            self.die()
+
+
+class SlerpProjectile(Projectile):
+    def __init__(self, end_position, **kwargs):
+        super().__init__(end_position=end_position, **kwargs)
+        self._pivot_point = self._position + (self._end_position - self._start_pos) / 2 + ((self._end_position - self._start_pos) / 2).rotate(90)
+
+    def move(self):
+        next_position = self._pivot_point + (self._position - self._pivot_point).slerp(self._end_position - self._pivot_point, 0.1)
+        self._move_vec = next_position - self._position
+        self.translate(self._move_vec)
+        if self.handle_collisions():
+            return
+        if (self._position - self._end_position).length() < 5:
             self.die()
 
 
@@ -73,3 +94,4 @@ class Meteorite(Projectile):
                           (self._end_position[0] + line_length, self._end_position[1] + line_length), 2)
         pygame.draw.line(self._screen, (0, 0, 0), (self._end_position[0] - line_length, self._end_position[1] + line_length),
                           (self._end_position[0] + line_length, self._end_position[1] - line_length), 2)
+

@@ -5,10 +5,38 @@ from UI import Bar
 from projectiles import Projectile
 from abc import ABC, abstractmethod
 import functools
+import random
 from weapons import RangeWeapon
 
 
+class EnemySpawner:
+    enemies_names_list = ["Imp", "FireElemental", "Cthulhu"]
+    def __init__(self, screen):
+        self._screen = screen
+        self._max_spawn_coordinate = screen.get_size()
+
+    def spawn_enemy_at(self, position: tuple):
+        eval(f"{random.choice(EnemySpawner.enemies_names_list)}(screen=self._screen, position={position})")
+
+    def spawn_enemy(self):
+        max_fixed_value = {"x_0": 0, "x_max": self._max_spawn_coordinate[0], "y_0": 0, "y_max": self._max_spawn_coordinate[1]}
+        fixed = random.choice(list(max_fixed_value.keys()))
+        position = None
+        if fixed in ("x_0", "x_max"):
+            position = (max_fixed_value[fixed], random.randrange(0, self._max_spawn_coordinate[1]))
+        if fixed in ("y_0", "y_max"):
+            position = (random.randrange(0, self._max_spawn_coordinate[0]), max_fixed_value[fixed])
+        self.spawn_enemy_at(position=position)
+
+    def spawn_enemies(self, count: int):
+        for i in range(0, count):
+            self.spawn_enemy()
+
+
 class Enemy(Mob, ABC):
+    count = 0
+    alive = 0
+
     def _check_delay(fn):
         @functools.wraps(fn)
         def wrapper(self, *args, **kwargs):
@@ -26,12 +54,15 @@ class Enemy(Mob, ABC):
         self._bar_center_offset = pygame.Vector2(0, -self._image_size[1] // 2 - 5)
         self._health_bar = Bar(screen=self._screen, bar_size=(self._image_size[0] * 0.8, 5), front_color=(255, 0, 0),
                                top_left=self._position + self._bar_center_offset, border_width=1, show_text=False)
+        Enemy.count += 1
+        Enemy.alive += 1
         if GroupNames.enemy not in Enemy.groups.keys():
             Enemy.groups[GroupNames.enemy] = Group(GroupNames.enemy)
         Enemy.groups[GroupNames.enemy].add(self)
 
     def die(self):
         Enemy.groups[GroupNames.enemy].remove(self)
+        Enemy.alive -= 1
         Mob.die(self)
 
     def draw(self) -> None:
