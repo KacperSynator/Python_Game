@@ -4,6 +4,7 @@ from object import Group, GroupNames
 from HUD import HUD
 from skills import MeteoriteSkill, Blink
 from weapons import Weapon, RangeWeapon
+from my_events import MyEvents
 
 
 class Player(Mob):
@@ -23,8 +24,11 @@ class Player(Mob):
     def weapon(self):
         return self._weapon
 
+    def game_over(self):
+        MyEvents.post_event(MyEvents.game_over_event)
+
     def die(self):
-        pass
+        self.game_over()
 
     def auto_attack(self, mouse_position):
         self._weapon.attack(mouse_position)
