@@ -4,8 +4,7 @@ from game import Game
 
 
 def main():
-    g = Game()
-    g.start()
+    Game.start()
 
 
 if __name__ == "__main__":

@@ -10,7 +10,8 @@ from weapons import RangeWeapon
 
 
 class EnemySpawner:
-    enemies_names_list = ["Imp", "FireElemental", "Cthulhu"]
+    enemies_names_list = ("Imp", "FireElemental", "Cthulhu")
+
     def __init__(self, screen):
         self._screen = screen
         self._max_spawn_coordinate = screen.get_size()
@@ -36,6 +37,7 @@ class EnemySpawner:
 class Enemy(Mob, ABC):
     count = 0
     alive = 0
+    damage_received = 0
 
     def _check_delay(fn):
         @functools.wraps(fn)
@@ -64,6 +66,10 @@ class Enemy(Mob, ABC):
         Enemy.groups[GroupNames.enemy].remove(self)
         Enemy.alive -= 1
         Mob.die(self)
+
+    def receive_damage(self, damage: float) -> None:
+        super().receive_damage(damage)
+        Enemy.damage_received += damage
 
     def draw(self) -> None:
         Mob.draw(self)

@@ -2,8 +2,8 @@ import pygame
 
 
 class Text:
-    def __init__(self, screen, font_size: int, center_position: tuple, text: str = "", font: str = 'freesansbold.ttf',
-                 color: tuple = (0, 0, 0),):
+    def __init__(self, screen, font_size: int, center_position: tuple, text: str = "",
+                 font: str = 'assets/fonts/android-insomnia/and_ins_reg.ttf', color: tuple = (0, 0, 0),):
         self._font = pygame.font.Font(font, font_size)
         self._screen = screen
         self._color = color

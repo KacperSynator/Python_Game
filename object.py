@@ -8,6 +8,10 @@ class GroupNames:
     player = "player"
     item = "item"
 
+    @staticmethod
+    def list() -> list:
+        return ["object", "moving_object", "enemy", "player", "item"]
+
 
 class Object(object):
     count = 0
@@ -174,7 +178,7 @@ class Group(object):
             self._list.remove(obj)
 
     def __bool__(self):
-        return True if len(self._list) > 0 else False
+        return bool(self._list)
 
     def __contains__(self, obj: Object):
         return True if obj in self._list else False

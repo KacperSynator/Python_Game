@@ -3,7 +3,7 @@ from player import Player
 from moving_object import MovingObject
 from object import Object
 from weapons import RangeWeapon
-from enemies import EnemySpawner
+from enemies import EnemySpawner, Enemy
 from my_events import MyEvents
 
 
@@ -18,16 +18,29 @@ class Game:
         pygame.display.set_caption("Game")
         icon = pygame.image.load("assets/items/weapons/staff.png")
         pygame.display.set_icon(icon)
-        # Player
-        self._player = Player(screen=self._screen, position=(300, 300))
-        RangeWeapon(screen=self._screen, **RangeWeapon.weapon_list["crystal_wand"], position=(600, 200))
         # Enemies
         self._enemy_spawner = EnemySpawner(screen=self._screen)
         self._enemy_spawner.spawn_enemies(count=5)
+        # Player
+        self._player = Player(screen=self._screen, position=(300, 300))
+        RangeWeapon(screen=self._screen, **RangeWeapon.weapon_list["crystal_wand"], position=(600, 200))
         # Clock
         self._clock = pygame.time.Clock()
 
-    def start(self):
+    @staticmethod
+    def start():
+        Game().game_loop()
+
+    def restart(self):
+        Object.groups = {}
+        Object.count = 0
+        Enemy.damage_received = 0
+        Enemy.count = 0
+        Enemy.alive = 0
+        del self
+        Game.start()
+
+    def game_loop(self):
         # Game loop
         running = True
         paused = False
@@ -50,6 +63,9 @@ class Game:
                             MyEvents.post_event(MyEvents.pause_event)
                 if event.type == MyEvents.unpause_event:
                     paused = False
+                if event.type == MyEvents.restart_event:
+                    self.restart()
+                    return
 
                 if not paused:
                     # mouse input
