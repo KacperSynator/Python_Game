@@ -26,9 +26,9 @@ class Projectile(MovingObject):
     def handle_collisions(self) -> bool:
         objs = []
         if self._target_pl_en[1] and self.check_group_collisions(Projectile.groups[GroupNames.enemy]):
-            objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.enemy]))
+            objs.extend(self.check_group_collisions(Projectile.groups[GroupNames.enemy]))
         if self._target_pl_en[0] and self.check_group_collisions(Projectile.groups[GroupNames.player]):
-            objs.append(*self.check_group_collisions(Projectile.groups[GroupNames.player]))
+            objs.extend(self.check_group_collisions(Projectile.groups[GroupNames.player]))
         if objs:
             for obj in objs:
                 obj.receive_damage(self._damage)

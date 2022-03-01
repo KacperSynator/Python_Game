@@ -35,6 +35,7 @@ class Object(object):
         Object.count += 1
         if GroupNames.object not in Object.groups.keys():
             Object.groups[GroupNames.object] = Group(GroupNames.object)
+            Object.groups[GroupNames.enemy] = Group(GroupNames.enemy)  # quick fix
         Object.groups[GroupNames.object].add(self)
 
     def __delete__(self):

@@ -3,8 +3,9 @@ from player import Player
 from moving_object import MovingObject
 from object import Object
 from weapons import RangeWeapon
-from enemies import EnemySpawner, Enemy
+from enemies import Enemy
 from my_events import MyEvents
+from wave_system import WaveSystem
 
 
 class Game:
@@ -19,8 +20,7 @@ class Game:
         icon = pygame.image.load("assets/items/weapons/staff.png")
         pygame.display.set_icon(icon)
         # Enemies
-        self._enemy_spawner = EnemySpawner(screen=self._screen)
-        self._enemy_spawner.spawn_enemies(count=5)
+        self._waves = WaveSystem(screen=self._screen)
         # Player
         self._player = Player(screen=self._screen, position=(300, 300))
         RangeWeapon(screen=self._screen, **RangeWeapon.weapon_list["crystal_wand"], position=(600, 200))
@@ -37,7 +37,6 @@ class Game:
         Enemy.damage_received = 0
         Enemy.count = 0
         Enemy.alive = 0
-        del self
         Game.start()
 
     def game_loop(self):
@@ -47,6 +46,8 @@ class Game:
         while running:
             self._clock.tick(60)
             self._screen.fill((255, 255, 255))
+
+            self._waves.update()
 
             for event in pygame.event.get():
                 if event.type == MyEvents.game_over_event:

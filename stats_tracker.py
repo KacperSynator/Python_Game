@@ -10,3 +10,8 @@ class StatTracker:
     def get_damage():
         return Enemy.damage_received
 
+    @staticmethod
+    def get_alive_enemies():
+        return Enemy.alive
+
+
