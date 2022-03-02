@@ -1,4 +1,8 @@
 # Python_Game
+
+<h2>Game Preview</h2>
+<img src="https://user-images.githubusercontent.com/62207289/156399208-7721723e-9058-468c-803e-687ac34842c7.gif" alt="Game Preview" width="800">
+
 <h2>Icons attribution links</h2>
 <ul>
 <li> <a href="https://www.flaticon.com/free-icons/icicle" title="icicle icons">Icicle icons created by Freepik - Flaticon</a> </li>
