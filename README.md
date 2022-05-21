@@ -1,9 +1,39 @@
 # Python_Game
+Simple 2D action game, with mulitple enemy, weapon and skill types. Beat infinite waves of enemies. Based on [pygame](https://www.pygame.org).  
+Currently only basics are implemented.
 
-<h2>Game Preview</h2>
+
+## Game Preview
 <img src="https://user-images.githubusercontent.com/62207289/156399208-7721723e-9058-468c-803e-687ac34842c7.gif" alt="Game Preview" width="800">
 
-<h2>Icons attribution links</h2>
+## Keybindings 
+* `AWDS` -> movement  
+* `R` -> use offensive skill
+* `SPACE` -> use deffensive/movment skill
+* `E` -> switch weapons
+* `LMB` -> weapons auto attack
+
+## Getting started
+1. Clone repo
+```
+git clone https://github.com/KacperSynator/Python_Game.git
+```
+
+2. Setup environment
+```
+# using pip
+pip install -r requirements.txt
+
+# using Conda
+conda create --name <env_name> --file requirements.txt
+```
+
+3. Run main.py
+```
+python main.py
+```
+
+## Icons attribution links
 <ul>
 <li> <a href="https://www.flaticon.com/free-icons/icicle" title="icicle icons">Icicle icons created by Freepik - Flaticon</a> </li>
 <li> <a href="https://www.flaticon.com/free-icons/ice" title="ice icons">Ice icons created by Freepik - Flaticon</a> </li>
